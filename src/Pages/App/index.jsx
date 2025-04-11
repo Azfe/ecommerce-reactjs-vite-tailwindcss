@@ -1,12 +1,22 @@
-import { useState } from 'react'
-import '../../App.css'
+import './App.css'
+import Home from '../Home'
+import MyAccount from '../MyAccount'
+import MyOrder from '../MyOrder'
+import MyOrders from '../MyOrders'
+import NotFound from '../NotFound'
+import SignIn from '../SignIn'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>      
-      <h1 className='bg-primary'>Vite + React</h1>      
+    <>
+      <Home />
+      <MyAccount />
+      <MyOrder />
+      <MyOrders />
+      <NotFound />
+      <SignIn />
     </>
   )
 }
