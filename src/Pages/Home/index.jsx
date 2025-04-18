@@ -1,11 +1,12 @@
+import Layout from "../../Components/Layout"
 
 function Home() {
-  
-    return (
-      <>      
-        <h1 className='bg-primary'>Home</h1>      
-      </>
-    )
-  }
-  
-  export default Home
+
+  return (
+    <Layout>
+      Home
+    </Layout>
+  )
+}
+
+export default Home
