@@ -1,10 +1,11 @@
+import Layout from "../../Components/Layout"
+
 function MyAccount() {
-  
-    return (
-      <>      
-        <h1 className='bg-primary'>My Account</h1>      
-      </>
-    )
-  }
-  
-  export default MyAccount
+  return (
+    <Layout>
+      MyAccount
+    </Layout>
+  )
+}
+
+export default MyAccount
