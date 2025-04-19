@@ -8,14 +8,14 @@ const Card = () => {
                     Skates
                 </span>
                 <img
-                    className='w-full h-full object-cover '
+                    className="w-full h-full object-cover rounded-lg"
                     src="https://images.pexels.com/photos/2777671/pexels-photo-2777671.png" alt="Decks"
                 />
-                <div className="absolute top-1 right-1 flex items-center justify-center bg-white rounded-full w-6 h-6 shadow-md font-display
+                <button className="absolute top-0 right-0 flex items-center justify-center bg-white w-6 h-6 rounded-full m-1 shadow-md font-display
                     hover:shadow-lg transition-shadow duration-300 ease-in-out"
                 >
                     +
-                </div>
+                </button>
             </figure>
             <p className="text-gray-neutral text-sm font-light flex justify-between w-full px-2">
                 <span className="text-sm font-light">Decks</span>
