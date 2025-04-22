@@ -1,4 +1,4 @@
-# Ecommerce
+# Ecommerce Aether Skateshop
 
 ## Descripción del proyecto
 
@@ -13,7 +13,7 @@ The project's goal is to create online store functionality so users can search f
 1. Clonar el repositorio:
 
     ```bash
-    git clone https://github.com/Azfe/landingpage_aether_skateshop.git
+    git clone https://github.com/Azfe/ecommerce-reactjs-vite-tailwindcss.git
     ```
 
 2. Navegar al directorio del proyecto:
