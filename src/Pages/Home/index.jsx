@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import Layout from "../../Components/Layout"
 import Card from "../../Components/Card"
+import ProductDetails from "../../Components/ProductDetails";
 
 function Home() {
 
@@ -49,6 +50,7 @@ function Home() {
         }
         {/*<pre>{JSON.stringify(data, null, 2)}</pre>*/}
       </div>
+      <ProductDetails />
     </Layout>
   )
 }
