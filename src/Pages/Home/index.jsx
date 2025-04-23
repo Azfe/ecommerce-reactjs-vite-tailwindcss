@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
 import Layout from "../../Components/Layout"
 import Card from "../../Components/Card"
+import ProductDetails from "../../Components/ProductDetails";
 
 function Home() {
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -48,6 +50,7 @@ function Home() {
         }
         {/*<pre>{JSON.stringify(data, null, 2)}</pre>*/}
       </div>
+      <ProductDetails />
     </Layout>
   )
 }

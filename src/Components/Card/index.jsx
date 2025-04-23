@@ -1,13 +1,24 @@
-import React from 'react';
+import { PlusIcon } from '@heroicons/react/24/solid'
+import { useContext } from 'react';
+import { ShoppingCartContext } from '../../Context';
 
 const Card = ({ product }) => {
+
+    const context = useContext(ShoppingCartContext);
+
+    const showProductDetails = (productDetails) => {
+        context.openProductDetails();
+        context.setProductDetailsToshow(productDetails);
+    }
 
     // Se verifica que el producto exista y tenga imágenes
     const productImage = product?.images?.[0] || 'https://placehold.co/300';
 
     return (
-        <div className="bg-white cursor-pointer w-56 h-60 rounded-lg shadow-md 
-            hover:shadow-lg transition-shadow duration-300 ease-in-out flex flex-col items-center justify-center relative"
+        <div 
+            className="bg-white cursor-pointer w-56 h-60 rounded-lg shadow-md 
+                hover:shadow-lg transition-shadow duration-300 ease-in-out flex flex-col items-center justify-center relative"
+            onClick={() => showProductDetails(product)}
         >
             <figure className="relative w-full h-4/5 mb-2 flex items-center justify-center">
                 <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-gray-neutral text-xs m-2 px-3 py-0.5">
@@ -18,10 +29,13 @@ const Card = ({ product }) => {
                     src={productImage}
                     alt={product?.title || 'Producto sin nombre'}
                 />
-                <button className="absolute top-0 right-0 flex items-center justify-center bg-white w-6 h-6 rounded-full m-1 shadow-md font-display
-                    hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                <button
+                    className="absolute top-0 right-0 flex items-center justify-center bg-white w-6 h-6 rounded-full m-1 shadow-md font-display
+                        transition-all transform hover:scale-110 hover:bg-tertiary hover:shadow-lg focus:ring-4 focus:ring-blue-300 active:scale-95
+                        animation cursor-pointer duration-300 ease-in-out"
+                    onClick={() => context.setCount(context.count + 1)}
                 >
-                    +
+                    <PlusIcon className="size-4 text-gray-950" />
                 </button>
             </figure>
             <p className="text-gray-neutral text-sm font-light flex justify-between w-full px-2">
