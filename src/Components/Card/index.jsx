@@ -18,7 +18,7 @@ const Card = ({ product }) => {
         <div 
             className="bg-white cursor-pointer w-56 h-60 rounded-lg shadow-md 
                 hover:shadow-lg transition-shadow duration-300 ease-in-out flex flex-col items-center justify-center relative"
-            onClick={() => showProductDetails()}
+            onClick={() => showProductDetails(product)}
         >
             <figure className="relative w-full h-4/5 mb-2 flex items-center justify-center">
                 <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-gray-neutral text-xs m-2 px-3 py-0.5">
