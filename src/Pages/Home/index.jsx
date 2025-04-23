@@ -3,6 +3,7 @@ import Layout from "../../Components/Layout"
 import Card from "../../Components/Card"
 
 function Home() {
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

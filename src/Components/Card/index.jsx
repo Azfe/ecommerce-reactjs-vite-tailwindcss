@@ -1,6 +1,9 @@
-import React from 'react';
+import { useContext } from 'react';
+import { ShoppingCartContext } from '../../Context';
 
 const Card = ({ product }) => {
+
+    const context = useContext(ShoppingCartContext);
 
     // Se verifica que el producto exista y tenga imágenes
     const productImage = product?.images?.[0] || 'https://placehold.co/300';
@@ -18,8 +21,11 @@ const Card = ({ product }) => {
                     src={productImage}
                     alt={product?.title || 'Producto sin nombre'}
                 />
-                <button className="absolute top-0 right-0 flex items-center justify-center bg-white w-6 h-6 rounded-full m-1 shadow-md font-display
-                    hover:shadow-lg transition-shadow duration-300 ease-in-out"
+                <button
+                    className="absolute top-0 right-0 flex items-center justify-center bg-white w-6 h-6 rounded-full m-1 shadow-md font-display
+                        transition-all transform hover:scale-110 hover:bg-tertiary hover:shadow-lg focus:ring-4 focus:ring-blue-300 active:scale-95
+                        animation cursor-pointer duration-300 ease-in-out"
+                    onClick={() => context.setCount(context.count + 1)}
                 >
                     +
                 </button>
