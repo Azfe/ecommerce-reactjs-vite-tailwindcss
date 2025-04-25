@@ -4,8 +4,7 @@ export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
   // Shopping Cart · Increment quantity
-  const [count, setCount] = useState(0);
-  //console.log("ShoppingCartProvider", count);
+  const [count, setCount] = useState(0);  
 
   // Product details · open/close
   const [isProductDetailsOpen, setIsProductDetailsOpen] = useState(false);
@@ -15,6 +14,9 @@ export const ShoppingCartProvider = ({ children }) => {
   // Product details · show product
   const [productDetailsToshow, setProductDetailsToshow] = useState({});
 
+  // Shopping Cart · Add products to cart
+  const [cartProducts, setCartProducts] = useState([]);
+
   return (
     <ShoppingCartContext.Provider value={{
       count, 
@@ -23,7 +25,9 @@ export const ShoppingCartProvider = ({ children }) => {
       closeProductDetails,
       isProductDetailsOpen,
       productDetailsToshow,
-      setProductDetailsToshow
+      setProductDetailsToshow,
+      cartProducts,
+      setCartProducts,
     }}>
       {children}
     </ShoppingCartContext.Provider>

@@ -12,7 +12,14 @@ const Card = ({ product }) => {
     }
 
     // Se verifica que el producto exista y tenga imágenes
+    //const productImage = product?.image || 'https://placehold.co/300';
     const productImage = product?.images?.[0] || 'https://placehold.co/300';
+
+    const addProductToCart = (product) => {
+        context.setCount(context.count + 1);
+        context.setCartProducts([...context.cartProducts, product]);
+        console.log('Producto añadido al carrito:', context.cartProducts);
+    }
 
     return (
         <div 
@@ -33,9 +40,9 @@ const Card = ({ product }) => {
                     className="absolute top-0 right-0 flex items-center justify-center bg-white w-6 h-6 rounded-full m-1 shadow-md font-display
                         transition-all transform hover:scale-110 hover:bg-tertiary hover:shadow-lg focus:ring-4 focus:ring-blue-300 active:scale-95
                         animation cursor-pointer duration-300 ease-in-out"
-                    onClick={() => context.setCount(context.count + 1)}
+                    onClick={() => addProductToCart(product)}
                 >
-                    <PlusIcon className="size-4 text-gray-950" />
+                    <PlusIcon className="size-4 text-gray-950"/>
                 </button>
             </figure>
             <p className="text-gray-neutral text-sm font-light flex justify-between w-full px-2">
