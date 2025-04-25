@@ -15,9 +15,12 @@ const Card = ({ product }) => {
     //const productImage = product?.image || 'https://placehold.co/300';
     const productImage = product?.images?.[0] || 'https://placehold.co/300';
 
-    const addProductToCart = (product) => {
+    const addProductToCart = (event, product) => {
+        event.stopPropagation(); // Evita que se dispare el evento del padre
         context.setCount(context.count + 1);
         context.setCartProducts([...context.cartProducts, product]);
+        context.openCheckoutSideMenu();
+        context.closeProductDetails();
         console.log('Producto añadido al carrito:', context.cartProducts);
     }
 
@@ -40,7 +43,7 @@ const Card = ({ product }) => {
                     className="absolute top-0 right-0 flex items-center justify-center bg-white w-6 h-6 rounded-full m-1 shadow-md font-display
                         transition-all transform hover:scale-110 hover:bg-tertiary hover:shadow-lg focus:ring-4 focus:ring-blue-300 active:scale-95
                         animation cursor-pointer duration-300 ease-in-out"
-                    onClick={() => addProductToCart(product)}
+                    onClick={(event) => addProductToCart(event, product)}
                 >
                     <PlusIcon className="size-4 text-gray-950"/>
                 </button>
