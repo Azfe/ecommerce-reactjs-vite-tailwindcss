@@ -1,10 +1,11 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context'
+import OrderCard from '../OrderCard';
 import './styles.css';
 
 const CheckoutSideMenu = () => {
-    const context = useContext(ShoppingCartContext);    
+    const context = useContext(ShoppingCartContext);
 
     return (
         <aside
@@ -21,6 +22,22 @@ const CheckoutSideMenu = () => {
                         onClick={() => context.closeCheckoutSideMenu()}
                     />
                 </div>
+            </div>
+            <div>
+                {
+                    context.cartProducts.length > 0 ? (
+                        context.cartProducts.map(product => (
+                            <OrderCard
+                                key={product.id}
+                                title={product.title}
+                                imageUrl={product.images[0]}
+                                price={product.price}
+                            />
+                        ))
+                    ) : (
+                        <p className="text-center text-gray-neutral">No hay productos en el carrito</p>
+                    )
+                }
             </div>
         </aside>
     );
