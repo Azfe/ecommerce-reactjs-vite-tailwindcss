@@ -1,4 +1,4 @@
-import { PlusIcon } from '@heroicons/react/24/solid'
+import { PlusIcon, CheckIcon } from '@heroicons/react/24/solid'
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context';
 
@@ -24,8 +24,35 @@ const Card = ({ product }) => {
         console.log('Producto añadido al carrito:', context.cartProducts);
     }
 
+    const renderIcon = (id) => {
+        const isInCart = context.cartProducts.filter(product => product.id === id).length > 0;
+
+        if (isInCart) {
+            return (
+                <button
+                className="absolute top-0 right-0 flex items-center justify-center bg-gray-700 w-6 h-6 rounded-full m-1 shadow-md font-display
+                        transition-all transform focus:ring-4 focus:ring-blue-300 active:scale-95
+                        animation cursor-pointer duration-300 ease-in-out"                
+            >                
+                <CheckIcon className="size-4 text-white" />
+            </button>
+            )
+        }
+
+        return (
+            <button
+                className="absolute top-0 right-0 flex items-center justify-center bg-white w-6 h-6 rounded-full m-1 shadow-md font-display
+                        transition-all transform hover:scale-110 hover:bg-tertiary hover:shadow-lg focus:ring-4 focus:ring-blue-300 active:scale-95
+                        animation cursor-pointer duration-300 ease-in-out"
+                onClick={(event) => addProductToCart(event, product)}
+            >
+                <PlusIcon className="size-4 text-gray-950" />
+            </button>
+        )
+    }
+
     return (
-        <div 
+        <div
             className="bg-white cursor-pointer w-56 h-60 rounded-lg shadow-md 
                 hover:shadow-lg transition-shadow duration-300 ease-in-out flex flex-col items-center justify-center relative"
             onClick={() => showProductDetails(product)}
@@ -39,14 +66,7 @@ const Card = ({ product }) => {
                     src={productImage}
                     alt={product?.title || 'Producto sin nombre'}
                 />
-                <button
-                    className="absolute top-0 right-0 flex items-center justify-center bg-white w-6 h-6 rounded-full m-1 shadow-md font-display
-                        transition-all transform hover:scale-110 hover:bg-tertiary hover:shadow-lg focus:ring-4 focus:ring-blue-300 active:scale-95
-                        animation cursor-pointer duration-300 ease-in-out"
-                    onClick={(event) => addProductToCart(event, product)}
-                >
-                    <PlusIcon className="size-4 text-gray-950"/>
-                </button>
+                {renderIcon(product.id)}
             </figure>
             <p className="text-gray-neutral text-sm font-light flex justify-between w-full px-2">
                 <span className="text-sm font-light">{product?.title || 'Producto sin nombre'}</span>

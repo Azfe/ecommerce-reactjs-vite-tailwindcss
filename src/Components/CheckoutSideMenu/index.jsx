@@ -23,7 +23,7 @@ const CheckoutSideMenu = () => {
                     />
                 </div>
             </div>
-            <div>
+            <div className="overflow-y-scroll">
                 {
                     context.cartProducts.length > 0 ? (
                         context.cartProducts.map(product => (
