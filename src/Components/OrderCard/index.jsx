@@ -1,7 +1,7 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
 const OrderCard = props => {
-    const { title, imageUrl, price } = props; // Desestructuración del objeto
+    const { id, title, imageUrl, price, handleDelete } = props; // Desestructuración del objeto
 
     return (
         <div className="flex justify-between items-center gap-2 mb-3">
@@ -25,7 +25,7 @@ const OrderCard = props => {
                 {/* Button close */}
                 <XMarkIcon
                     className="size-6 text-gray-950 cursor-pointer"
-                    onClick={() => context.closeCheckoutSideMenu()}
+                    onClick={() => handleDelete(id)}
                 />
             </div>
         </div>
