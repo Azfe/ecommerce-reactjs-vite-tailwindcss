@@ -13,6 +13,7 @@ function Home() {
     const fetchData = async () => {
       try {
         const response = await fetch('https://api.escuelajs.co/api/v1/products');
+        //https://fakestoreapi.com/products
 
         if (!response.ok) {
           throw new Error('Error en la solicitud');
