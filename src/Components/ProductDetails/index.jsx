@@ -5,7 +5,7 @@ import './styles.css';
 
 const ProductDetails = () => {
     const context = useContext(ShoppingCartContext);
-    console.log("Product to show:", context.productDetailsToshow);
+    //console.log("Product to show:", context.productDetailsToshow);
 
     const product = context.productDetailsToshow || {}; // Si es undefined, usa un objeto vacío
     const productImage = product.images?.[0] || 'https://placehold.co/300'; // Maneja images[0] 
