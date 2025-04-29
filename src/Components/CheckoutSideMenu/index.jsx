@@ -2,11 +2,13 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useContext } from 'react';
 import { ShoppingCartContext } from '../../Context'
 import OrderCard from '../OrderCard';
+import { totalPrice } from '../../Utils';
 import './styles.css';
 
 const CheckoutSideMenu = () => {
     const context = useContext(ShoppingCartContext);
 
+    // Delete product from cart
     const handleDelete = (id) => {
         const filteredProducts = context.cartProducts.filter(product => product.id !== id);
         context.setCartProducts(filteredProducts);
@@ -47,6 +49,12 @@ const CheckoutSideMenu = () => {
                         <p className="text-center text-gray-neutral">No hay productos en el carrito</p>
                     )
                 }
+            </div>
+            <div className='px-6'>
+                <p className='flex justify-between items-center'>
+                    <span className='font-medium'>Total: </span>
+                    <span className='font-medium text-2xl'>{totalPrice(context.cartProducts)}€</span>
+                </p>
             </div>
         </aside>
     );
