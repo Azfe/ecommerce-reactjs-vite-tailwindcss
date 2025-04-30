@@ -16,6 +16,18 @@ const CheckoutSideMenu = () => {
         console.log('Producto eliminado del carrito:', context.cartProducts);
     }
 
+    const handleCheckout = () => {
+        const orderToCheckout = {
+            date: '01.02.23',
+            products: context.cartProducts,
+            totalProducts: context.cartProducts.length,
+            totalPrice: totalPrice(context.cartProducts)
+        }
+        context.setOrder([...context.order, orderToCheckout])
+        context.setCartProducts([])
+        //context.setSearchByTitle(null)
+    }
+
     return (
         <aside
             className={
@@ -32,7 +44,7 @@ const CheckoutSideMenu = () => {
                     />
                 </div>
             </div>
-            <div className="overflow-y-scroll">
+            <div className="overflow-y-scroll flex-1">
                 {
                     context.cartProducts.length > 0 ? (
                         context.cartProducts.map(product => (
@@ -50,11 +62,17 @@ const CheckoutSideMenu = () => {
                     )
                 }
             </div>
-            <div className='px-6'>
+            <div className='px-6 mb-6'>
                 <p className='flex justify-between items-center'>
                     <span className='font-medium'>Total: </span>
                     <span className='font-medium text-2xl'>{totalPrice(context.cartProducts)}€</span>
                 </p>
+                <button
+                    className='w-full bg-primary text-white rounded-lg p-3 mt-4 hover:bg-tertiary transition-colors duration-300 cursor-pointer'
+                    onClick={() => handleCheckout()}
+                >
+                    Checkout
+                </button>
             </div>
         </aside>
     );
