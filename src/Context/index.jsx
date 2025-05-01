@@ -1,7 +1,9 @@
 import { createContext, useState } from "react";
 
+// Creación del contexto
 export const ShoppingCartContext = createContext();
 
+// Proveedor del contexto
 export const ShoppingCartProvider = ({ children }) => {
   // Shopping Cart · Increment Quantity
   const [count, setCount] = useState(0);  

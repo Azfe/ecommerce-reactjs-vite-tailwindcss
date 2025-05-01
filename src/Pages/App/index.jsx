@@ -28,7 +28,7 @@ const AppRoutes = () => {
 const App = () => {
 
   return (
-    <ShoppingCartProvider>      
+    <ShoppingCartProvider>
       <BrowserRouter>
         <AppRoutes />
         <Navbar />

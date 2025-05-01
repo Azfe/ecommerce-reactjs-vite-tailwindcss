@@ -32,7 +32,9 @@ function MyOrder() {
               />
             ))
           ) : (
-            <p className="text-center text-gray-neutral">No hay productos en el carrito</p>
+            <p className="text-center text-gray-neutral">
+              No hay productos en el carrito
+            </p>
           )
         }
       </div>

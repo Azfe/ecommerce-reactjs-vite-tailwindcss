@@ -18,14 +18,28 @@ const CheckoutSideMenu = () => {
     }
 
     const handleCheckout = () => {
+        // Función para formatear la fecha actual
+        const getCurrentDate = () => {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear().toString().slice(-2); // Obtiene los últimos 2 dígitos
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            
+            return `${day}.${month}.${year} ${hours}:${minutes}`;
+            // Formato: DD.MM.YY HH:MM
+        };
+
         const orderToCheckout = {
-            date: '01.02.23',
+            date: getCurrentDate(),
             products: context.cartProducts,
             totalProducts: context.cartProducts.length,
             totalPrice: totalPrice(context.cartProducts)
         }
-        context.setOrder([...context.order, orderToCheckout])
-        context.setCartProducts([])
+        context.setOrder([...context.order, orderToCheckout]);
+        context.setCartProducts([]);
+        context.closeCheckoutSideMenu();
         //context.setSearchByTitle(null)
     }
 
