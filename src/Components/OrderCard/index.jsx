@@ -5,16 +5,11 @@ const OrderCard = props => {
     const { id, title, imageUrl, price, handleDelete } = props; // Desestructuración del objeto
     let renderTrashIcon
     if (handleDelete) {
-        renderTrashIcon = (
+        renderTrashIcon =
             <TrashIcon
                 className="size-5 text-gray-neutral cursor-pointer"
                 onClick={() => handleDelete(id)}
             />
-        )
-    } else {
-        renderTrashIcon = (
-            <XMarkIcon className="w-6 h-6 text-gray-neutral" />
-        )
     }
 
     return (
