@@ -9,10 +9,8 @@ function MyOrder() {
   const context = useContext(ShoppingCartContext);
   const currentPath = window.location.pathname
   let index = currentPath.split('/')[2]
-  //let index = currentPath.substring(currentPath.lastIndexOf('/') + 1)
-  console.log('index', index)
-  if (index === 'last') index = context.order?.length - 1
-  console.log('context', context.order?.length)
+  //let index = currentPath.substring(currentPath.lastIndexOf('/') + 1)  
+  if (index === 'last') index = context.order?.length - 1  
 
   return (
     <Layout>
