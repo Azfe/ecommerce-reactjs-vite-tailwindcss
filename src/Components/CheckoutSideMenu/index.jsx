@@ -1,5 +1,6 @@
-import { XMarkIcon } from '@heroicons/react/24/solid'
 import { useContext } from 'react';
+import { Link } from 'react-router-dom'
+import { XMarkIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context'
 import OrderCard from '../OrderCard';
 import { totalPrice } from '../../Utils';
@@ -14,6 +15,32 @@ const CheckoutSideMenu = () => {
         context.setCartProducts(filteredProducts);
         context.setCount(context.count - 1);
         console.log('Producto eliminado del carrito:', context.cartProducts);
+    }
+
+    const handleCheckout = () => {
+        // Función para formatear la fecha actual
+        const getCurrentDate = () => {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear().toString().slice(-2); // Obtiene los últimos 2 dígitos
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            
+            return `${day}.${month}.${year} ${hours}:${minutes}`;
+            // Formato: DD.MM.YY HH:MM
+        };
+
+        const orderToCheckout = {
+            date: getCurrentDate(),
+            products: context.cartProducts,
+            totalProducts: context.cartProducts.length,
+            totalPrice: totalPrice(context.cartProducts)
+        }
+        context.setOrder([...context.order, orderToCheckout]);
+        context.setCartProducts([]);
+        context.closeCheckoutSideMenu();
+        //context.setSearchByTitle(null)
     }
 
     return (
@@ -32,7 +59,7 @@ const CheckoutSideMenu = () => {
                     />
                 </div>
             </div>
-            <div className="overflow-y-scroll">
+            <div className="overflow-y-scroll flex-1">
                 {
                     context.cartProducts.length > 0 ? (
                         context.cartProducts.map(product => (
@@ -50,11 +77,19 @@ const CheckoutSideMenu = () => {
                     )
                 }
             </div>
-            <div className='px-6'>
+            <div className='px-6 mb-6'>
                 <p className='flex justify-between items-center'>
                     <span className='font-medium'>Total: </span>
                     <span className='font-medium text-2xl'>{totalPrice(context.cartProducts)}€</span>
                 </p>
+                <Link to='/my-orders/last'>
+                    <button
+                        className='w-full bg-primary text-white rounded-lg p-3 mt-4 hover:bg-tertiary transition-colors duration-300 cursor-pointer'
+                        onClick={() => handleCheckout()}
+                    >
+                        Checkout
+                    </button>
+                </Link>
             </div>
         </aside>
     );
