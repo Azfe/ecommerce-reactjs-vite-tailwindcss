@@ -1,48 +1,32 @@
-import { useState, useEffect } from "react"
+import { useContext } from "react"
 import Layout from "../../Components/Layout"
 import Card from "../../Components/Card"
 import ProductDetails from "../../Components/ProductDetails";
+import { ShoppingCartContext } from "../../Context";
 
 function Home() {
+  const context = useContext(ShoppingCartContext);
 
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://api.escuelajs.co/api/v1/products');
-        //https://fakestoreapi.com/products
-
-        if (!response.ok) {
-          throw new Error('Error en la solicitud');
-        }
-
-        const jsonData = await response.json();
-        //console.log(jsonData);
-        setProducts(jsonData);
-      } catch (err) {
-        setError(err.message);
-        console.error("Error fetching products:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []); // El array vacío significa que se ejecuta solo al montar el componente
-
-  if (loading) return <div>Cargando...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (context.loading) return <div>Cargando...</div>;
+  if (context.error) return <div>Error: {error}</div>;
 
   return (
     <Layout>
-      Home
+      <div className='flex items-center justify-center relative w-80 mb-6'>
+        <h1 className='font-medium text-xl'>
+          Productos exclusivos de skate
+        </h1>
+      </div>
+      <input
+        type="text"
+        placeholder="Busca tu producto"
+        className="rounded-lg border border-gray-neutral w-80 p-4 mb-4 focus:outline-none"
+        onChange={(event) => context.setSearchByTitle(event.target.value)}
+      />
       <div className="grid grid-cols-4 gap-4 w-full max-w-screen-lg mx-auto">
         {
-          products.length > 0 ? (
-            products.map((product) => (
+          context.products.length > 0 ? (
+            context.products.map((product) => (
               <Card key={product.id} product={product} />
             ))
           ) : (
