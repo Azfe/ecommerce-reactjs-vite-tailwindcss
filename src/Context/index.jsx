@@ -28,12 +28,13 @@ export const ShoppingCartProvider = ({ children }) => {
   const [order, setOrder] = useState([]);
 
   // Get products · Fetch products
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // Get products · Search products by title
-  const [searchByTitle, setSearchByTitle] = useState([]);
+  const [searchByTitle, setSearchByTitle] = useState(null);
   console.log("searchByTitle: ", searchByTitle);
 
   useEffect(() => {
@@ -59,10 +60,26 @@ export const ShoppingCartProvider = ({ children }) => {
     fetchData();
   }, []); // El array vacío significa que se ejecuta solo al montar el componente
 
+  const filteredProductsByTitle = (products, searchByTitle) => {
+    return products?.filter(product => product.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+  }
+  console.log("filteredProductsByTitle: ", filteredProductsByTitle);
+
+  useEffect(() => {
+    if (searchByTitle) setFilteredProducts(filteredProductsByTitle(products, searchByTitle))
+    if (!searchByTitle) setFilteredProducts(products)
+  }, [products, searchByTitle])
+
+  //console.log("filteredProducts: ", filteredProducts);  
+
   /*
-  if (loading) return <div>Cargando...</div>;
-  if (error) return <div>Error: {error}</div>;
-  */
+  useEffect(() => {
+    if (searchByTitle && searchByCategory) filteredProductsByTitle(filterBy('BY_TITLE_AND_CATEGORY', products, searchByTitle, searchByCategory))
+    if (searchByTitle && !searchByCategory) filteredProductsByTitle(filterBy('BY_TITLE', products, searchByTitle, searchByCategory))
+    if (!searchByTitle && searchByCategory) filteredProductsByTitle(filterBy('BY_CATEGORY', products, searchByTitle, searchByCategory))
+    if (!searchByTitle && !searchByCategory) filteredProductsByTitle(filterBy(null, products, searchByTitle, searchByCategory))
+  }, [products, searchByTitle, searchByCategory])*/
+
   return (
     <ShoppingCartContext.Provider value={{
       count,
@@ -86,7 +103,9 @@ export const ShoppingCartProvider = ({ children }) => {
       error,
       setError,
       searchByTitle,
-      setSearchByTitle
+      setSearchByTitle,
+      filteredProducts,
+      setFilteredProducts
     }}>
       {children}
     </ShoppingCartContext.Provider>
