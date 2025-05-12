@@ -40,7 +40,7 @@ const CheckoutSideMenu = () => {
         context.setOrder([...context.order, orderToCheckout]);
         context.setCartProducts([]);
         context.closeCheckoutSideMenu();
-        //context.setSearchByTitle(null)
+        context.setSearchByTitle(null);
     }
 
     return (
