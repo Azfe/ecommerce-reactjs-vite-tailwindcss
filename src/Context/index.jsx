@@ -70,7 +70,7 @@ export const ShoppingCartProvider = ({ children }) => {
     return products?.filter(product => product.category.name.toLowerCase().includes(searchByCategory.toLowerCase()))
   }
 
-  const filterBy = (searchType, products, searchByTitle, searchByCategory) => {    
+  const filterBy = (searchType, products, searchByTitle, searchByCategory) => {
     if (searchType === 'BY_TITLE') {
       return filteredProductsByTitle(products, searchByTitle)
     }
@@ -87,12 +87,12 @@ export const ShoppingCartProvider = ({ children }) => {
       return products
     }
   }
-      
+
   useEffect(() => {
     if (searchByTitle && searchByCategory) setFilteredProducts(filterBy('BY_TITLE_AND_CATEGORY', products, searchByTitle, searchByCategory))
     if (searchByTitle && !searchByCategory) setFilteredProducts(filterBy('BY_TITLE', products, searchByTitle, searchByCategory))
     if (!searchByTitle && searchByCategory) setFilteredProducts(filterBy('BY_CATEGORY', products, searchByTitle, searchByCategory))
-    if (!searchByTitle && !searchByCategory) setFilteredProducts(filterBy(null, products, searchByTitle, searchByCategory))
+    if (!searchByTitle && !searchByCategory) setFilteredProducts(filterBy(null, products, searchByTitle, searchByCategory))    
   }, [products, searchByTitle, searchByCategory])
 
   return (

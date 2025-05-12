@@ -8,25 +8,15 @@ function Home() {
   const context = useContext(ShoppingCartContext);
 
   const renderView = () => {
-    if (context.searchByTitle?.length > 0) {
-      if (context.filteredProducts?.length > 0) {
-        return (
-          context.filteredProducts?.map((product) => (
-            <Card key={product.id} product={product} />
-          ))
-        )
-      } else {
-        return (
-          <div className="flex items-center justify-center w-full h-full">
-            <h2 className="font-medium text-xl">No hay productos que coincidan con tu búsqueda</h2>
-          </div>
-        )
-      }
-    } else {
+    if (context.filteredProducts?.length > 0) {
       return (
-        context.products?.map((product) => (
+        context.filteredProducts?.map(product => (
           <Card key={product.id} product={product} />
         ))
+      )
+    } else {
+      return (
+        <div>We don't have anything :(</div>
       )
     }
   }

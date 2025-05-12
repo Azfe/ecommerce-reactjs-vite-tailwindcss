@@ -114,7 +114,7 @@ const Navbar = () => {
                 <li className='flex justify-center items-center'>
                     <ShoppingCartIcon className="size-4 text-gray-950 mr-1" />
                     <div>
-                        {context.count}
+                        {context.cartProducts.length > 0 ? context.cartProducts.length : 0}
                     </div>
                 </li>
             </ul>
